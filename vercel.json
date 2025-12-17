@@ -1,0 +1,7 @@
+{
+    "buildCommand": "vite build",
+    "devCommand": "vite dev",
+    "installCommand": "bun install",
+    "outputDirectory": "dist",
+    "rootDirectory": "mindweaver-main"
+}
