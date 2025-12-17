@@ -1,0 +1,10 @@
+project_id = "nonrvmfalscnjmxsvwmi"
+
+[functions.chat]
+verify_jwt = true
+
+[functions.translate]
+verify_jwt = false
+
+[functions.email2fa]
+verify_jwt = true
