@@ -1,6 +1,6 @@
 {
     "outputDirectory":  "dist",
-    "buildCommand":  "npm run build",
+    "buildCommand":  "npx vite build",
     "rewrites":  [
                      {
                          "destination":  "/index.html",
