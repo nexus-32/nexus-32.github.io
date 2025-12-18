@@ -99,7 +99,7 @@ const App = () => (
         <RuntimeSettingsBridge />
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        <BrowserRouter basename="/mindweaver-ai">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/chat" element={<Chat />} />
