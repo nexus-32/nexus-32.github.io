@@ -1,0 +1,373 @@
+/* Mobile-First Styles for MindWeaver */
+
+/* ===== Base Mobile Styles ===== */
+@media (max-width: 767px) {
+  /* Reset and base */
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  input, textarea {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+  
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    font-size: 16px; /* Prevent zoom on input focus */
+  }
+  
+  /* ===== Layout Structure ===== */
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #0a0a0a;
+  }
+  
+  #root {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+  }
+  
+  /* ===== Header ===== */
+  header,
+  [class*="header"],
+  div[class*="header"] {
+    height: 60px;
+    padding: 0 12px;
+    background: rgba(17, 24, 39, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+  
+  /* Logo - hide on small screens */
+  header h1,
+  [class*="logo"] {
+    display: none;
+  }
+  
+  /* Navigation buttons */
+  button[class*="outline"],
+  [class*="menu-button"] {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    margin: 0 4px;
+  }
+  
+  /* Language selector */
+  select[data-language-selector] {
+    height: 36px;
+    padding: 6px 8px;
+    font-size: 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  /* ===== Main Content Area ===== */
+  main,
+  [class*="main"],
+  div[class*="conversation"] {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 72px 12px 92px 12px;
+    margin-top: 60px;
+    margin-bottom: 80px;
+  }
+  
+  /* ===== Chat Messages ===== */
+  [class*="message"],
+  div[class*="message"] {
+    margin-bottom: 12px;
+    padding: 12px 16px;
+    border-radius: 16px;
+    max-width: 85%;
+    word-wrap: break-word;
+  }
+  
+  /* User messages */
+  [class*="message"]:last-child,
+  div[class*="message"][class*="user"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+  }
+  
+  /* AI messages */
+  [class*="message"]:not([class*="user"]),
+  div[class*="message"]:not([class*="user"]) {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-right: auto;
+    border-bottom-left-radius: 4px;
+  }
+  
+  /* Avatars */
+  [class*="avatar"],
+  img[class*="avatar"] {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  /* ===== Input Area ===== */
+  [class*="input-container"],
+  div[class*="input"] {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: rgba(17, 24, 39, 0.98);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 999;
+  }
+  
+  /* Text input */
+  input[type="text"],
+  textarea,
+  [class*="input-field"] {
+    flex: 1;
+    height: 44px;
+    padding: 12px 16px;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  textarea:focus,
+  [class*="input-field"]:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #667eea;
+  }
+  
+  /* Voice button */
+  button[class*="voice"],
+  [class*="microphone"] {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  button[class*="voice"]:active,
+  [class*="microphone"]:active {
+    transform: scale(0.95);
+  }
+  
+  button[class*="voice"].recording,
+  [class*="microphone"].recording {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    animation: pulse 1.5s infinite;
+  }
+  
+  /* Send button */
+  button[class*="send"],
+  [class*="submit"] {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50%;
+    background: #667eea;
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* ===== Side Panels (hidden on mobile) ===== */
+  aside,
+  [class*="sidebar"],
+  [class*="drawer"] {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  aside.open,
+  [class*="sidebar"].open,
+  [class*="drawer"].open {
+    transform: translateX(0);
+  }
+  
+  /* ===== Modals ===== */
+  [class*="modal"],
+  [class*="dialog"] {
+    margin: 0;
+    border-radius: 16px 16px 0 0;
+    max-height: 90vh;
+    width: 100%;
+  }
+  
+  /* ===== Settings ===== */
+  [class*="settings"] {
+    padding: 20px;
+  }
+  
+  [class*="settings"] > div {
+    margin-bottom: 20px;
+  }
+  
+  [class*="settings"] label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  [class*="settings"] select,
+  [class*="settings"] input {
+    width: 100%;
+    height: 44px;
+    padding: 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 16px;
+  }
+  
+  /* ===== Animations ===== */
+  @keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  [class*="message"] {
+    animation: slideIn 0.3s ease;
+  }
+  
+  /* ===== Touch Optimizations ===== */
+  button,
+  [role="button"],
+  a {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* ===== Scrollbar Styling ===== */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+  }
+}
+
+/* ===== Small Phones ===== */
+@media (max-width: 374px) {
+  header,
+  [class*="header"] {
+    padding: 0 8px;
+    height: 56px;
+  }
+  
+  main,
+  [class*="main"] {
+    padding: 68px 8px 88px 8px;
+  }
+  
+  [class*="message"],
+  div[class*="message"] {
+    max-width: 90%;
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+  
+  [class*="input-container"],
+  div[class*="input"] {
+    height: 76px;
+    padding: 10px;
+  }
+}
+
+/* ===== Large Phones ===== */
+@media (min-width: 415px) and (max-width: 767px) {
+  [class*="message"],
+  div[class*="message"] {
+    max-width: 80%;
+  }
+  
+  header,
+  [class*="header"] {
+    padding: 0 16px;
+  }
+}
+
+/* ===== Landscape Orientation ===== */
+@media (max-width: 767px) and (orientation: landscape) {
+  header,
+  [class*="header"] {
+    height: 50px;
+  }
+  
+  [class*="input-container"],
+  div[class*="input"] {
+    height: 70px;
+  }
+  
+  main,
+  [class*="main"] {
+    padding: 62px 12px 82px 12px;
+  }
+}
