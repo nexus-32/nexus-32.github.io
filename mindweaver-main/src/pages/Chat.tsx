@@ -14,10 +14,12 @@ import ConversationSidebar from '@/components/chat/ConversationSidebar';
 import VisualSearch, { type SearchTab } from '@/components/visual-search/VisualSearch';
 import FileUpload from '@/components/FileUpload';
 import AnalystMode from '@/components/AnalystMode';
+import AIModeSelector from '@/components/AIModeSelector';
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useVoice } from '@/contexts/VoiceContext';
 import { LanguageSelector } from '@/components/LanguageSelector';
+import { AIMode } from '@/types/aimodes';
 
 type Message = {
   id: string;
@@ -43,6 +45,7 @@ const Chat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [personality, setPersonality] = useState<Personality>('friend');
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
+  const [selectedAIMode, setSelectedAIMode] = useState<AIMode | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -484,6 +487,10 @@ const Chat = () => {
 
           <div className="flex-1 overflow-y-auto">
             <div className="max-w-6xl mx-auto p-4">
+              <AIModeSelector 
+                onModeSelect={setSelectedAIMode}
+                currentMode={selectedAIMode}
+              />
               <MessageList 
                 messages={messages} 
                 isLoading={isLoading}

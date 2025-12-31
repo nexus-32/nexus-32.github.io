@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles, Cpu } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
@@ -49,6 +49,10 @@ const Hero = () => {
           </Button>
           <Button variant="glass" size="lg" onClick={() => navigate('/auth')}>
             Узнать больше
+          </Button>
+          <Button variant="outline" size="lg" onClick={() => navigate('/modes')} className="group">
+            <Cpu className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
+            AI Modes
           </Button>
         </div>
       </div>
