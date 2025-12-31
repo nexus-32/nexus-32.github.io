@@ -13,6 +13,7 @@ import Auth from "./pages/Auth";
 import Settings from "./pages/Settings";
 import AIModesMarketplace from "./pages/AIModesMarketplace";
 import CreateAIMode from "./pages/CreateAIMode";
+import TestPage from "./pages/TestPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -113,6 +114,7 @@ const App = () => (
               <Route path="/modes" element={<AIModesMarketplace />} />
               <Route path="/modes/create" element={<CreateAIMode />} />
               <Route path="/modes/edit/:id" element={<CreateAIMode />} />
+              <Route path="/test" element={<TestPage />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
