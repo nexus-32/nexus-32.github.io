@@ -47,7 +47,7 @@ const PersonalityManager: React.FC<PersonalityManagerProps> = ({
     color: 'text-blue-500',
     systemPrompt: '',
     temperature: 0.7,
-    maxTokens: 2000,
+    maxTokens: 1000000,
     capabilities: [],
     isActive: true,
     isCustom: true
@@ -64,7 +64,7 @@ const PersonalityManager: React.FC<PersonalityManagerProps> = ({
       color: 'text-orange-500',
       systemPrompt: 'Ты - профессиональный тренер по личностному росту. Помоги пользователю достичь целей, мотивируй и давай практические советы.',
       temperature: 0.7,
-      maxTokens: 2000,
+      maxTokens: 1000000,
       capabilities: ['Мотивация', 'Планирование', 'Анализ целей'],
       isActive: true,
       isCustom: false
@@ -77,7 +77,7 @@ const PersonalityManager: React.FC<PersonalityManagerProps> = ({
       color: 'text-pink-500',
       systemPrompt: 'Ты - близкий друг. Будь поддерживающим, эмпатичным, но честным. Слушай внимательно и давай искренние советы.',
       temperature: 0.8,
-      maxTokens: 1500,
+      maxTokens: 800000,
       capabilities: ['Поддержка', 'Эмпатия', 'Советы'],
       isActive: true,
       isCustom: false
@@ -90,7 +90,7 @@ const PersonalityManager: React.FC<PersonalityManagerProps> = ({
       color: 'text-blue-500',
       systemPrompt: 'Ты - аналитик данных. Анализируй информацию, создавай графики, таблицы и детальные отчеты. Будь точным и структурированным.',
       temperature: 0.3,
-      maxTokens: 3000,
+      maxTokens: 2000000,
       capabilities: ['Анализ данных', 'Графики', 'Отчеты'],
       isActive: true,
       isCustom: false
@@ -103,7 +103,7 @@ const PersonalityManager: React.FC<PersonalityManagerProps> = ({
       color: 'text-purple-500',
       systemPrompt: 'Ты - творческий ассистент. Генерируй оригинальные идеи, помогай с творческими проектами и вдохновляй.',
       temperature: 0.9,
-      maxTokens: 2000,
+      maxTokens: 1500000,
       capabilities: ['Креативность', 'Идеи', 'Вдохновение'],
       isActive: true,
       isCustom: false
@@ -148,7 +148,7 @@ const PersonalityManager: React.FC<PersonalityManagerProps> = ({
       color: 'text-blue-500',
       systemPrompt: '',
       temperature: 0.7,
-      maxTokens: 2000,
+      maxTokens: 1000000,
       capabilities: [],
       isActive: true,
       isCustom: true
@@ -175,7 +175,7 @@ const PersonalityManager: React.FC<PersonalityManagerProps> = ({
       color: formData.color || 'text-blue-500',
       systemPrompt: formData.systemPrompt,
       temperature: formData.temperature || 0.7,
-      maxTokens: formData.maxTokens || 2000,
+      maxTokens: formData.maxTokens || 1000000,
       capabilities: formData.capabilities || [],
       isActive: formData.isActive !== false,
       isCustom: true
@@ -405,15 +405,15 @@ const PersonalityManager: React.FC<PersonalityManagerProps> = ({
                     type="range"
                     id="maxTokens"
                     min="500"
-                    max="4000"
-                    step="100"
+                    max="2000000"
+                    step="1000"
                     value={formData.maxTokens || 2000}
                     onChange={(e) => setFormData(prev => ({ ...prev, maxTokens: parseInt(e.target.value) }))}
                     className="w-full"
                   />
                   <div className="flex justify-between text-xs text-muted-foreground">
                     <span>500</span>
-                    <span>4000</span>
+                    <span>2,000,000</span>
                   </div>
                 </div>
               </div>

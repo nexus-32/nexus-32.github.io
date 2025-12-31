@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Menu, Mic, Search, Send, Settings as SettingsIcon, Sparkles, Upload, FileText, Brain, Heart, Zap, Code, Briefcase, GraduationCap } from 'lucide-react';
+import { Menu, Mic, Search, Send, Settings as SettingsIcon, Sparkles, Upload, FileText, Brain, Heart, Zap, Code, Briefcase, GraduationCap, Plus } from 'lucide-react';
 import PersonalitySelector from '@/components/chat/PersonalitySelector';
 import MessageList from '@/components/chat/MessageList';
 import ConversationSidebar from '@/components/chat/ConversationSidebar';
@@ -444,6 +444,14 @@ const Chat = () => {
                 onChange={setPersonality} 
                 customPersonalities={customPersonalities}
               />
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => window.open('/settings?tab=personalities', '_blank')}
+                title="Создать новый режим"
+              >
+                <Plus className="w-4 h-4" />
+              </Button>
                 <LanguageSelector className="hidden sm:flex w-[180px]" />
                 <Button
                   type="button"
