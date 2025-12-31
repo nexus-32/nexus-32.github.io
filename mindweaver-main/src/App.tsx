@@ -108,7 +108,7 @@ const App = () => (
           <div className="fixed bottom-0 right-0 text-xs text-muted-foreground bg-background p-1 rounded-tl">
             v2.1.0 - {new Date().toLocaleDateString()}
           </div>
-          <BrowserRouter basename="/mindweaver-ai">
+          <BrowserRouter basename="/">
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/chat" element={<Chat />} />
