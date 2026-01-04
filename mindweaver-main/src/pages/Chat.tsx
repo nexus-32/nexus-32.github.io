@@ -1,8 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/hooks/useAuth';
-import { useUserSettings } from '@/hooks/useUserSettings';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
@@ -34,8 +31,6 @@ type Personality = 'coach' | 'friend' | 'analyst' | 'creative' | string;
 const Chat = () => {
   const { conversationId } = useParams();
   const navigate = useNavigate();
-  const { user, loading } = useAuth();
-  const { settings, loading: settingsLoading } = useUserSettings();
   const isMobile = useIsMobile();
   const { listenOnce, speak, isListening, setSelectedVoiceURI } = useVoice();
   const { toast } = useToast();
@@ -45,12 +40,15 @@ const Chat = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [personality, setPersonality] = useState<Personality>('friend');
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
-  const [selectedAIMode, setSelectedAIMode] = useState<AIMode | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchRequest, setSearchRequest] = useState<{ tab?: SearchTab; query: string } | null>(null);
-  const [isFileUploadOpen, setIsFileUploadOpen] = useState(false);
+  // Mock user for demo
+  const user = {
+    id: 'demo-user',
+    email: 'demo@example.com',
+    user_metadata: {
+      name: 'Demo User',
+      avatar_url: null
   const [uploadedFiles, setUploadedFiles] = useState<any[]>([]);
   const [customPersonalities, setCustomPersonalities] = useState<any[]>([]);
 
@@ -295,72 +293,23 @@ const Chat = () => {
   };
 
   const sendMessage = async () => {
-    if (!input.trim() || !currentConversationId || !user) return;
+    if (!input.trim() || !currentConversationId) return;
 
-    const userMessage = input.trim();
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      role: 'user',
+      content: input.trim(),
+      created_at: new Date().toISOString()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
-    const { error: userMsgError } = await supabase.from('messages').insert({
-      conversation_id: currentConversationId,
-      role: 'user',
-      content: userMessage,
-    });
-
-    if (userMsgError) {
-      toast({ title: 'Ошибка', description: userMsgError.message, variant: 'destructive' });
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      const conversationHistory = messages.map((m) => ({
-        role: m.role,
-        content: m.content,
-      }));
-
-      conversationHistory.push({ role: 'user', content: userMessage });
-
-      const response = await fetch(
-        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-          },
-          body: JSON.stringify({
-            messages: conversationHistory,
-            personality,
-            language: settings.language,
-          }),
-        }
-      );
-
-      if (!response.ok || !response.body) {
-        throw new Error('Ошибка ответа от сервера');
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      let assistantMessage = '';
-      let textBuffer = '';
-      let streamDone = false;
-
-      while (!streamDone) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        textBuffer += decoder.decode(value, { stream: true });
-
-        let newlineIndex: number;
-        while ((newlineIndex = textBuffer.indexOf('\n')) !== -1) {
-          let line = textBuffer.slice(0, newlineIndex);
-          textBuffer = textBuffer.slice(newlineIndex + 1);
-
-          if (line.endsWith('\r')) line = line.slice(0, -1);
-          if (line.startsWith(':') || line.trim() === '') continue;
-          if (!line.startsWith('data: ')) continue;
-
+    // Simulate AI response
+    setTimeout(() => {
+      const aiResponse: Message = {
+        id: (Date.now() + 1).toString(),
           const jsonStr = line.slice(6).trim();
           if (jsonStr === '[DONE]') {
             streamDone = true;
